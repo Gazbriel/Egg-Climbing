@@ -32,7 +32,7 @@ public class SwipeDetector : MonoBehaviour {
         if (Input.GetMouseButtonDown(0))
         {
             isDragging = true;
-            startTouch = Input.mousePosition;
+            startTouch = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         }
         else if (Input.GetMouseButtonUp(0))
         {
@@ -51,7 +51,7 @@ public class SwipeDetector : MonoBehaviour {
             if (Input.GetMouseButton(0))
             {
                 //Debug.Log(swipeDelta);
-                Vector2 mouseUp = Input.mousePosition;
+                Vector2 mouseUp = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 swipeDelta = mouseUp - startTouch;
                 //Debug.Log(startTouch);
                 //Debug.Log(swipeDelta);
