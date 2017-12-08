@@ -14,12 +14,17 @@ public class CollisionDetector : MonoBehaviour {
 		
 	}
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    
+    private void OnCollisionStay2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Safe Ground")
         {
             Debug.Log("Safe Ground Touched");
             GameObject.Find("Slide Detector").GetComponent<SwipeDetector>().SetCanJump(true);
         }
+    }
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        GameObject.Find("Slide Detector").GetComponent<SwipeDetector>().SetCanJump(false);
     }
 }

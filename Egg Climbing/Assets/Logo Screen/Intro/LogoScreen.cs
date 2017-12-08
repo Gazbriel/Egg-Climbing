@@ -23,6 +23,6 @@ public class LogoScreen : MonoBehaviour {
         float fadeTime = GameObject.Find("Fader").GetComponent<FaderScene>().BeginFade(1);
         Debug.Log("Found it");
         yield return new WaitForSeconds(fadeTime);
-        SceneManager.LoadScene("Main");
+        SceneManager.LoadScene("Menu");
     }
 }

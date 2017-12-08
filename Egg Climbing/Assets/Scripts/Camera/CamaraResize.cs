@@ -6,8 +6,8 @@ public class CamaraResize : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        float TARGET_WIDTH = 200f;
-        float TARGET_HEIGHT = 400f;
+        float TARGET_WIDTH = 800f;
+        float TARGET_HEIGHT = 1600f;
         int PIXELS_TO_UNITS = 50; // 1:1 Radio de pixeles a unidades
         float desiredRatio = TARGET_WIDTH / TARGET_HEIGHT;
         float currentRatio = (float)Screen.width / (float)Screen.height;

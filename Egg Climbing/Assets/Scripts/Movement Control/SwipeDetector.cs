@@ -92,15 +92,7 @@ public class SwipeDetector : MonoBehaviour {
     public float torqueForce;
     private void AddTorque()
     {
-        if (swipeDelta.x < 0)
-        {
-            GameObject.FindGameObjectWithTag("Egg").GetComponent<Rigidbody2D>().AddTorque(torqueForce);
-        }
-        else
-        {
-            GameObject.FindGameObjectWithTag("Egg").GetComponent<Rigidbody2D>().AddTorque(-torqueForce);
-        }
-        
+        GameObject.FindGameObjectWithTag("Egg").GetComponent<Rigidbody2D>().AddTorque(-swipeDelta.x * torqueForce);
     }
     #endregion
 
