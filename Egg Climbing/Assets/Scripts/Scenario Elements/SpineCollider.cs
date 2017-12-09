@@ -5,8 +5,10 @@ using UnityEngine.SceneManagement;
 
 public class SpineCollider : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
+    //velocity to detect that the egg is not moving or is quiet
+    public float detectionVelocity;
+    // Use this for initialization
+    void Start () {
 		
 	}
 	
@@ -17,7 +19,7 @@ public class SpineCollider : MonoBehaviour {
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.name == "Egg")
+        if (collision.gameObject.name == "Egg" && collision.gameObject.GetComponent<Rigidbody2D>().velocity.y < detectionVelocity)
         {
             //Code for braking the Egg
             Debug.Log("Break the Egg");

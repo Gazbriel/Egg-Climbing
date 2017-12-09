@@ -8,7 +8,7 @@ public class SwipeDetector : MonoBehaviour {
     private bool isDragging;
     private Vector2 startTouch, swipeDelta;
     #region canJump Variable and acces properties
-    private bool canJump;
+    public bool canJump;
     public void SetCanJump(bool a)
     {
         canJump = a;
@@ -75,15 +75,15 @@ public class SwipeDetector : MonoBehaviour {
                 //do the action with swipeMagnitude.normalized
                 GameObject.FindGameObjectWithTag("Egg").GetComponent<Rigidbody2D>().AddForce(swipeDelta.normalized * circleLimitThrow * power);
                 AddTorque();
-                SetCanJump(false);
             }
             else if (swipeDelta.magnitude < circleLimitThrow && swipeDelta.magnitude > underCircleLimitThrow && swipeDelta.y > 0)
             {
                 Debug.Log("Did Throw Between");
                 GameObject.FindGameObjectWithTag("Egg").GetComponent<Rigidbody2D>().AddForce(swipeDelta * power);
                 AddTorque();
-                SetCanJump(false);
+                
             }
+            SetCanJump(false);
         }
     }
 
@@ -92,7 +92,16 @@ public class SwipeDetector : MonoBehaviour {
     public float torqueForce;
     private void AddTorque()
     {
-        GameObject.FindGameObjectWithTag("Egg").GetComponent<Rigidbody2D>().AddTorque(-swipeDelta.x * torqueForce);
+        //GameObject.FindGameObjectWithTag("Egg").GetComponent<Rigidbody2D>().AddTorque(-swipeDelta.x * torqueForce);
+        if (swipeDelta.x < 0)
+        {
+            GameObject.FindGameObjectWithTag("Egg").GetComponent<Rigidbody2D>().AddTorque(torqueForce);
+        }
+        else
+        {
+            GameObject.FindGameObjectWithTag("Egg").GetComponent<Rigidbody2D>().AddTorque(-torqueForce);
+        }
+        
     }
     #endregion
 
