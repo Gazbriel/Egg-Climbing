@@ -5,6 +5,13 @@ using UnityEngine.SceneManagement;
 
 public class UIMenu : MonoBehaviour {
 
+    private void Start()
+    {
+        #region Background Music Play
+        GameObject.Find("Audio Manager").GetComponent<AudioManager>().Play("Menu Background Music");
+        #endregion
+    }
+
     public float timeToWait;
     private bool play;// true if the game need to start
 	public void PlayGame()
@@ -19,6 +26,9 @@ public class UIMenu : MonoBehaviour {
         {
             if (timeToWait < 0)
             {
+                //stop playn the music
+                GameObject.Find("Audio Manager").GetComponent<AudioManager>().Stop("Menu Background Music");
+                //------------------------
                 SceneManager.LoadScene("Main");
             }
             else
