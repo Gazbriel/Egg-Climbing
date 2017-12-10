@@ -19,7 +19,7 @@ public class SpineCollider : MonoBehaviour {
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.name == "Egg" && collision.gameObject.GetComponent<Rigidbody2D>().velocity.y < detectionVelocity)
+        if (collision.gameObject.tag == "Egg" && collision.gameObject.GetComponent<Rigidbody2D>().velocity.y < detectionVelocity)
         {
             //Code for braking the Egg
             Debug.Log("Break the Egg");

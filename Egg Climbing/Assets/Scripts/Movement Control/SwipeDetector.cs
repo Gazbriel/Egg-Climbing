@@ -68,6 +68,10 @@ public class SwipeDetector : MonoBehaviour {
         //verify if can do the action
         if (canJump)
         {
+            //Stop the movement of the Egg
+            GameObject.FindGameObjectWithTag("Egg").GetComponent<Rigidbody2D>().velocity = new Vector3();
+            //--------------------------------
+
             //if swipedelta is bigger than the limit and if you pointed up
             if (swipeDelta.magnitude > circleLimitThrow && swipeDelta.y > 0)
             {

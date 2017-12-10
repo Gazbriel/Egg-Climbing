@@ -19,8 +19,14 @@ public class CollisionDetector : MonoBehaviour {
     {
         if (collision.gameObject.tag == "Safe Ground")
         {
-            Debug.Log("Safe Ground Touched");
-            GameObject.Find("Slide Detector").GetComponent<SwipeDetector>().SetCanJump(true);
+            //the condition is necessarly because that way if the egg is not
+            //quiet, the canjump variable activates and can jump from a spine, and i dont want that
+            if (GetComponent<Rigidbody2D>().velocity.y < 2)
+            {
+                Debug.Log("Safe Ground Touched");
+                GameObject.Find("Slide Detector").GetComponent<SwipeDetector>().SetCanJump(true);
+            }
+            
         }
     }
     private void OnCollisionExit2D(Collision2D collision)
