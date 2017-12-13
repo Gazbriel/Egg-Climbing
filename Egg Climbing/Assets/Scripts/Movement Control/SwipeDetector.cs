@@ -87,7 +87,8 @@ public class SwipeDetector : MonoBehaviour {
                 AddTorque();
                 
             }
-            SetCanJump(false);
+            canJump = false;
+            GameObject.FindGameObjectWithTag("Egg").GetComponent<CollisionDetector>().SetGrounded(false);
         }
     }
 
