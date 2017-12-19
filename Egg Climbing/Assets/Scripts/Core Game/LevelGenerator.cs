@@ -19,6 +19,9 @@ public class LevelGenerator : MonoBehaviour {
             if ((lastElementPositionY - GameObject.FindGameObjectWithTag("Egg").transform.position.y) < drawingDistance)
             {
                 SelectElement();
+            }
+            if ((lastBackgroundPositionY - GameObject.FindGameObjectWithTag("Egg").transform.position.y) < drawingDistance)
+            {
                 GenerateBackgound();
             }
         }

@@ -8,7 +8,10 @@ public class UIMenu : MonoBehaviour {
     private void Start()
     {
         #region Background Music Play
-        GameObject.Find("Audio Manager").GetComponent<AudioManager>().Play("Menu Background Music");
+        if (!FindObjectOfType<AudioManager>().GetSound("Menu Background Music").isPlaying)
+        {
+            FindObjectOfType<AudioManager>().Play("Menu Background Music");
+        }
         #endregion
     }
 
@@ -20,8 +23,28 @@ public class UIMenu : MonoBehaviour {
         play = true;
     }
 
+    private bool backToMenu;
+    public void BackToMenu()
+    {
+        SetOutAnimations();
+        backToMenu = true;
+    }
+
+    private bool eggMenu;
+    public void GoToEggMenu()
+    {
+        SetOutAnimations();
+        eggMenu = true;
+    }
+
     private void Update()
     {
+        ChangeScene();
+    }
+
+    private void ChangeScene()
+    {
+        #region Play
         if (play)
         {
             if (timeToWait < 0)
@@ -36,15 +59,45 @@ public class UIMenu : MonoBehaviour {
                 timeToWait -= Time.deltaTime;
             }
         }
+        #endregion
+
+        #region BackToMenu
+        if (backToMenu)
+        {
+            if (timeToWait < 0)
+            {
+                SceneManager.LoadScene("Menu");
+            }
+            else
+            {
+                timeToWait -= Time.deltaTime;
+            }
+        }
+        #endregion
+
+        #region EggMenu
+        if (eggMenu)
+        {
+            if (timeToWait < 0)
+            {
+                SceneManager.LoadScene("EggsMenu");
+            }
+            else
+            {
+                timeToWait -= Time.deltaTime;
+            }
+        }
+        #endregion
     }
 
     #region Set Out the animations
     private void SetOutAnimations()
     {
-        GameObject.Find("Play").GetComponent<Animator>().SetBool("out", true);
-        GameObject.Find("Cartel").GetComponent<Animator>().SetBool("out", true);
-        GameObject.Find("Settings").GetComponent<Animator>().SetBool("out", true);
-        GameObject.Find("Other").GetComponent<Animator>().SetBool("out", true);
+        var anims = GetComponentsInChildren<Animator>();
+        foreach (var anim in anims)
+        {
+            anim.SetBool("out", true);
+        }
     }
     #endregion
 }

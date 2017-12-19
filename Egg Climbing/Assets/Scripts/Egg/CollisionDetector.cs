@@ -40,6 +40,10 @@ public class CollisionDetector : MonoBehaviour {
     {
         grounded = a;
     }
+    public bool GetGrounded()
+    {
+        return grounded;
+    }
     public float lasHightGrounded;
     public float hightAmplitude;//to detect the collision with safe ground
 
@@ -63,11 +67,16 @@ public class CollisionDetector : MonoBehaviour {
             {
                 grounded = true;
                 lasHightGrounded = gameObject.transform.position.y;
+                
+                //Do damage
+                GetComponent<LifeDuration>().Damage();
+                //Debug.Log("Collision velocity "+GetComponent<Rigidbody2D>().velocity.y);
             }
         }
         Debug.Log("The eagle has landed");
+
         
     }
     #endregion
-    
+
 }

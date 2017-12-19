@@ -22,8 +22,8 @@ public class SpineCollider : MonoBehaviour {
         if (collision.gameObject.tag == "Egg" && collision.gameObject.GetComponent<Rigidbody2D>().velocity.y < detectionVelocity)
         {
             //Code for braking the Egg
-            Debug.Log("Break the Egg");
-            SceneManager.LoadScene("Menu");
+            FindObjectOfType<AudioManager>().Play("Shatter Egg");
+            GameObject.FindGameObjectWithTag("Egg").GetComponent<LifeDuration>().Die();
         }
     }
 }

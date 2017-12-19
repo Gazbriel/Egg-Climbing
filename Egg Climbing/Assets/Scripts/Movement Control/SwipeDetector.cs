@@ -65,8 +65,8 @@ public class SwipeDetector : MonoBehaviour {
 
     private void DoAction()
     {
-        //verify if can do the action
-        if (canJump)
+        //verify if can do the action and there is a rigidboy attached to the egg
+        if (canJump && GameObject.FindGameObjectWithTag("Egg").GetComponent<Rigidbody2D>() != null)
         {
             //Stop the movement of the Egg
             GameObject.FindGameObjectWithTag("Egg").GetComponent<Rigidbody2D>().velocity = new Vector3();
@@ -79,16 +79,22 @@ public class SwipeDetector : MonoBehaviour {
                 //do the action with swipeMagnitude.normalized
                 GameObject.FindGameObjectWithTag("Egg").GetComponent<Rigidbody2D>().AddForce(swipeDelta.normalized * circleLimitThrow * power);
                 AddTorque();
+
+                //-----
+                canJump = false;
+                GameObject.FindGameObjectWithTag("Egg").GetComponent<CollisionDetector>().SetGrounded(false);
             }
             else if (swipeDelta.magnitude < circleLimitThrow && swipeDelta.magnitude > underCircleLimitThrow && swipeDelta.y > 0)
             {
                 Debug.Log("Did Throw Between");
                 GameObject.FindGameObjectWithTag("Egg").GetComponent<Rigidbody2D>().AddForce(swipeDelta * power);
                 AddTorque();
-                
+
+                //-----
+                canJump = false;
+                GameObject.FindGameObjectWithTag("Egg").GetComponent<CollisionDetector>().SetGrounded(false);
             }
-            canJump = false;
-            GameObject.FindGameObjectWithTag("Egg").GetComponent<CollisionDetector>().SetGrounded(false);
+            
         }
     }
 

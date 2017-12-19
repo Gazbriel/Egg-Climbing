@@ -12,6 +12,7 @@ public class Sound{
 
     public string name;
     public AudioClip clip;
+    public bool isPlaying;
 
     //----[Range(0f, 1f)]------le determina valor a volumen entre esos valores.
     [Range(0f, 1f)]
