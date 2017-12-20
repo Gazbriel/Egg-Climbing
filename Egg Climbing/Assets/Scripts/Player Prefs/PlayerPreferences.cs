@@ -42,6 +42,7 @@ public class PlayerPreferences : MonoBehaviour {
 
         //this only works if the boolean is active
         ResetBest();
+        ResetCascaras();
         //-----------------------------------------
     }
 
@@ -76,6 +77,28 @@ public class PlayerPreferences : MonoBehaviour {
     {
         Debug.Log("New Best " + currentScore);
         PlayerPrefs.SetInt("best", currentScore);
+    }
+    #endregion
+
+    #region Set the cascaras
+    public bool resetCascaras;
+    private int cascarasObtained;
+    private void ResetCascaras()
+    {
+        if (resetCascaras)
+        {
+            PlayerPrefs.SetInt("cascaras", 0);
+        }
+    }
+    public int GetCascarasObtained()
+    {
+        return cascarasObtained;
+    }
+    public void SetCascarasObtained()
+    {
+        PlayerPrefs.SetInt("cascaras", PlayerPrefs.GetInt("cascaras") + (int)(2 + currentScore / 10));
+        Debug.Log("cascaras " + PlayerPrefs.GetInt("cascaras"));
+        cascarasObtained = (int)(2 + currentScore / 10);
     }
     #endregion
 }

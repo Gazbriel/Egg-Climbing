@@ -35,6 +35,7 @@ public class LifeDuration : MonoBehaviour {
     #endregion
 
     #region Damage Region
+    private bool eggIsDead;
     public int eggLife;
     public int GetEggLife()
     {
@@ -84,21 +85,33 @@ public class LifeDuration : MonoBehaviour {
 
     public void Die()
     {
-        //Set the Braker layer to the last one
-        GetComponentInChildren<BrakeLayerController>().DieLayer();
-        //----------------------------------------
+        if (!eggIsDead)
+        {
+            //Set the cascaras obtained
+            GameObject.FindGameObjectWithTag("Player Prefs").GetComponent<PlayerPreferences>().SetCascarasObtained();
+            //The method knows how many cascaras give to the player.
+            //----------------------------
 
-        //Eliminate the rigidbody and the colliders
-        Destroy(GetComponent<Rigidbody2D>());
-        Destroy(GetComponent<CapsuleCollider2D>());
-        //-----------------------------------------
+            //Set the Braker layer to the last one
+            GetComponentInChildren<BrakeLayerController>().DieLayer();
+            //----------------------------------------
 
+            //Eliminate the rigidbody and the colliders
+            Destroy(GetComponent<Rigidbody2D>());
+            Destroy(GetComponent<CapsuleCollider2D>());
+            //-----------------------------------------
+
+
+
+            //Close the big leafs
+            GameObject.Find("Leaf Pass").GetComponent<Animator>().SetBool("out", false);
+            GameObject.Find("Leaf Pass").GetComponent<Animator>().SetBool("in", true);
+            StartCoroutine(LoadSceneAfterDie());
+
+            //to run this metho only once
+            eggIsDead = true;
+        }
         
-
-        //Close the big leafs
-        GameObject.Find("Leaf Pass").GetComponent<Animator>().SetBool("out", false);
-        GameObject.Find("Leaf Pass").GetComponent<Animator>().SetBool("in", true);
-        StartCoroutine(LoadSceneAfterDie());
     }
 
     public float secondsToWaitAfterDeath;

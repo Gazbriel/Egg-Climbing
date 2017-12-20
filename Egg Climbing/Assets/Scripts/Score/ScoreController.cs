@@ -16,6 +16,7 @@ public class ScoreController : MonoBehaviour {
         UpdateHighestEggPosition();
     }
 
+    #region Higest Position
     private int highestEggPosition;
     private void UpdateHighestEggPosition()
     {
@@ -28,6 +29,10 @@ public class ScoreController : MonoBehaviour {
 
     private void SetCurrentScore()
     {
-        GameObject.FindGameObjectWithTag("Player Prefs").GetComponent<PlayerPreferences>().SetCurrentScore(highestEggPosition/2);
+        GameObject.FindGameObjectWithTag("Player Prefs").GetComponent<PlayerPreferences>().SetCurrentScore(highestEggPosition/10);
     }
+    #endregion
+
+    
+
 }
