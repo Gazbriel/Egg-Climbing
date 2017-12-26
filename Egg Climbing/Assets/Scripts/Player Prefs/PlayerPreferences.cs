@@ -25,13 +25,26 @@ public class PlayerPreferences : MonoBehaviour {
     }
     #endregion
 
-    #region Reset Best Score
+    #region Reset Best Score && EggsCollected
     public bool resetBest;
     private void ResetBest()
     {
         if (resetBest)
         {
             PlayerPrefs.SetInt("best", 0);
+        }
+    }
+    public bool resetEggsCollected;
+    private void ResetEggsCollected()
+    {
+        if (resetEggsCollected)
+        {
+            //needed to put the name of every egg here.
+            PlayerPrefs.SetInt("Egg 1", 0);
+            PlayerPrefs.SetInt("Egg 2", 0);
+            PlayerPrefs.SetInt("Egg 3", 0);
+            PlayerPrefs.SetInt("Egg 4", 0);
+            PlayerPrefs.SetInt("Egg 5", 0);
         }
     }
     #endregion
@@ -43,7 +56,12 @@ public class PlayerPreferences : MonoBehaviour {
         //this only works if the boolean is active
         ResetBest();
         ResetCascaras();
+        ResetEggsCollected();
         //-----------------------------------------
+
+        //Set the first egg alwways available (0 is false, 1 is true)
+        PlayerPrefs.SetInt("Egg 1", 1);
+        //-----------------------------------------------------------
     }
 
     public int bestscore;
@@ -101,4 +119,25 @@ public class PlayerPreferences : MonoBehaviour {
         cascarasObtained = (int)(2 + currentScore / 10);
     }
     #endregion
+
+    #region Eggs Select
+    // Player.Pref "egg"  //the egg that the player is using.
+    public GameObject egg;
+
+    //private void LoadEgg()
+    //{
+    //this method later will load the egg that the player was using during the las time he layed the game
+    //}
+
+    public void SetEgg(GameObject egg)
+    {
+        this.egg = egg;
+        Debug.Log("The egg is seted to " + egg.name);
+    }
+    public GameObject GetCurrentEgg()
+    {
+        return egg;
+    }
+    #endregion
+
 }

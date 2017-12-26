@@ -22,7 +22,9 @@ public class LifeDuration : MonoBehaviour {
     //but now just load a value:
     private void LoadEgg()
     {
-        eggLife = 3;
+        //eggLife = 3;
+
+        
 
         //pass the value to the braker layer controller
         GetComponentInChildren<BrakeLayerController>().SetStarterLife(eggLife);
@@ -130,4 +132,6 @@ public class LifeDuration : MonoBehaviour {
         }
     }
     #endregion
+
+
 }

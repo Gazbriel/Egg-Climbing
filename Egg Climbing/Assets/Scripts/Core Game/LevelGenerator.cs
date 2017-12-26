@@ -7,9 +7,7 @@ public class LevelGenerator : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         CreateStart();
-        
-	}
-    
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -64,7 +62,8 @@ public class LevelGenerator : MonoBehaviour {
     private void CreateStart()
     {
         Instantiate(longBranch, new Vector3(-5, 0, 0), longBranch.transform.rotation);
-        Instantiate(egg, new Vector3(0, 1, 0), egg.transform.rotation);
+        //here the egg is taken from the player preferences
+        Instantiate(GameObject.FindGameObjectWithTag("Player Prefs").GetComponent<PlayerPreferences>().GetCurrentEgg(), new Vector3(0, 1, 0), egg.transform.rotation);
         lastElementPositionY = 0;
 
         //this methods calls need to be changed to a more progressive one
