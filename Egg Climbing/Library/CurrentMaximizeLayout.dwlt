@@ -23,7 +23,7 @@ MonoBehaviour:
   m_MinSize: {x: 713, y: 492}
   m_MaxSize: {x: 18008, y: 14042}
   vertical: 0
-  controlID: 20835
+  controlID: 2458
 --- !u!114 &2
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -123,7 +123,7 @@ MonoBehaviour:
   m_MinSize: {x: 436, y: 492}
   m_MaxSize: {x: 14006, y: 14042}
   vertical: 1
-  controlID: 20836
+  controlID: 2459
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -147,7 +147,7 @@ MonoBehaviour:
   m_MinSize: {x: 404, y: 221}
   m_MaxSize: {x: 8004, y: 4021}
   vertical: 0
-  controlID: 20801
+  controlID: 2460
 --- !u!114 &5
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -201,9 +201,9 @@ MonoBehaviour:
     height: 343
   m_TreeViewState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 62e5fbff
-    m_LastClickedID: -268958
-    m_ExpandedIDs: 64e5fbff98e9fbff1821fcffb833fcffea34fcff8836fcff7c8bfcff848bfcff76a9fcff1ac8fcffc0e3fcffac11fdfffc13fdffca39fdff5c3bfdff0a3ffdff7c43fdff7e43fdffb84afdffb856fdffbc56fdffc456fdffc656fdff005afdff14a0ffff16a0ffff34a8ffff86aaffff22b8fffff6baffff54bdffff22e6ffff42e7ffff0ee9ffffdcfbfffff4ffffff00000000a82700006c2d00002c600000
+    m_SelectedIDs: 10f1ffff
+    m_LastClickedID: -3824
+    m_ExpandedIDs: 32f1ffff9cf6ffffdcfbffff00000000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -222,7 +222,7 @@ MonoBehaviour:
       m_ClientGUIView: {fileID: 5}
     m_SearchString: 
   m_ExpandedScenes:
-  - PlayResults
+  - Menu
   m_CurrenRootInstanceID: 0
   m_Locked: 0
   m_CurrentSortingName: TransformSorting
@@ -280,14 +280,14 @@ MonoBehaviour:
     width: 810
     height: 343
   m_SceneLighting: 1
-  lastFramingTime: 326.1336274959476
+  lastFramingTime: 2555.4619593537273
   m_2DMode: 1
   m_isRotationLocked: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 4.3939323, y: -0.015829481, z: -10}
+    m_Target: {x: 2.7782936, y: -0.74838126, z: 0}
     speed: 2
-    m_Value: {x: 4.3939323, y: -0.015829481, z: -10}
+    m_Value: {x: 2.7782936, y: -0.74838126, z: 0}
   m_RenderMode: 0
   m_ValidateTrueMetals: 0
   m_SceneViewState:
@@ -314,9 +314,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 42.88741
+    m_Target: 43.585785
     speed: 2
-    m_Value: 42.88741
+    m_Value: 43.585785
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -407,10 +407,10 @@ MonoBehaviour:
     - {x: 427.00003, y: 124.8}
     - {x: 588, y: 157.80002}
   m_PreviewAnimator: {fileID: 0}
-  m_AnimatorController: {fileID: 9100000, guid: abe8c15dc33b0fb4b97561aebbf41cc1,
+  m_AnimatorController: {fileID: 9100000, guid: f62dcdc2f55fe6941861d7664082a87a,
     type: 2}
   m_BreadCrumbs:
-  - m_Target: {fileID: 1107569105603133496, guid: abe8c15dc33b0fb4b97561aebbf41cc1,
+  - m_Target: {fileID: 1107195317370934044, guid: f62dcdc2f55fe6941861d7664082a87a,
       type: 2}
     m_ScrollPosition: {x: 0, y: 0}
   stateMachineGraph: {fileID: 0}
@@ -447,7 +447,7 @@ MonoBehaviour:
   m_MinSize: {x: 436, y: 271}
   m_MaxSize: {x: 14006, y: 10021}
   vertical: 0
-  controlID: 20837
+  controlID: 2437
 --- !u!114 &12
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -466,8 +466,8 @@ MonoBehaviour:
     y: 0
     width: 720
     height: 271
-  m_MinSize: {x: 232, y: 271}
-  m_MaxSize: {x: 10002, y: 10021}
+  m_MinSize: {x: 230, y: 250}
+  m_MaxSize: {x: 10000, y: 10000}
   m_ActualView: {fileID: 13}
   m_Panes:
   - {fileID: 13}
@@ -512,19 +512,19 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 0
     m_Folders:
-    - Assets/Scenes
+    - Assets/Audio/Sound Effects/Ambient Gameplay
   m_ViewMode: 1
   m_StartGridSize: 60
   m_LastFolders:
-  - Assets/Scenes
+  - Assets/Audio/Sound Effects/Ambient Gameplay
   m_LastFoldersGridSize: 60
   m_LastProjectPath: D:\Rober Proyecto\UNITY\Egg-Climbing\Egg Climbing
   m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 147}
-    m_SelectedIDs: f6250000
-    m_LastClickedID: 9718
-    m_ExpandedIDs: 00000000e62400009e2500001426000044260000942600009c260000fa2600000827000000ca9a3bffffff7f
+    scrollPos: {x: 0, y: 0}
+    m_SelectedIDs: 12380000
+    m_LastClickedID: 14354
+    m_ExpandedIDs: 00000000f024000094260000be260000d8260000202700003a27000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -552,7 +552,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000e62400009e2500001426000044260000942600009c260000fa2600000827000000ca9a3bffffff7f
+    m_ExpandedIDs: 00000000f024000094260000be260000d8260000202700003a27000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -577,10 +577,10 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: 62e5fbff
-    m_LastClickedInstanceID: -268958
+    m_SelectedInstanceIDs: 10f1ffff
+    m_LastClickedInstanceID: -3824
     m_HadKeyboardFocusLastEvent: 0
-    m_ExpandedInstanceIDs: c62300000000000084e9ffff2241ffffce230000b4240000082400002c65ffffd8240000422400001a240000cc250000d4eaffff44240000bef4ffff04340000ac360000ce250000242a00003e3b0000ac3000002e2f0000f6240000902500000a25000062260000282d00002c2d00005a250000642500007a260000082500002825000030250000
+    m_ExpandedInstanceIDs: c62300000000000084e9ffff2241ffffce230000b4240000082400002c65ffffd8240000422400001a240000cc250000d4eaffff44240000bef4ffff04340000ac360000ce250000242a00003e3b0000ac3000002e2f0000f6240000902500000a25000062260000282d00002c2d00005a250000642500007a26000008250000282500003025000042250000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -679,8 +679,8 @@ MonoBehaviour:
     y: 0
     width: 360
     height: 271
-  m_MinSize: {x: 204, y: 221}
-  m_MaxSize: {x: 4004, y: 4021}
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 2}
   m_Panes:
   - {fileID: 2}
@@ -704,8 +704,8 @@ MonoBehaviour:
     y: 0
     width: 286
     height: 635
-  m_MinSize: {x: 277, y: 71}
-  m_MaxSize: {x: 4002, y: 4021}
+  m_MinSize: {x: 275, y: 50}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 18}
   m_Panes:
   - {fileID: 18}

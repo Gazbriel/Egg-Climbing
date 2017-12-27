@@ -89,6 +89,11 @@ public class LifeDuration : MonoBehaviour {
     {
         if (!eggIsDead)
         {
+            //Stop the Music
+            GameObject.Find("Audio Manager").GetComponent<AudioManager>().Stop("Gameplay");
+            GameObject.Find("Audio Manager").GetComponent<AudioManager>().Stop("Ambient");
+            //----------------------------------------------------------------------------------
+
             //Set the cascaras obtained
             GameObject.FindGameObjectWithTag("Player Prefs").GetComponent<PlayerPreferences>().SetCascarasObtained();
             //The method knows how many cascaras give to the player.

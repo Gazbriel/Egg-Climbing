@@ -7,6 +7,11 @@ public class LevelGenerator : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         CreateStart();
+
+        //------Play Music-------------------------------------------------------------
+        GameObject.Find("Audio Manager").GetComponent<AudioManager>().Play("Gameplay");
+        GameObject.Find("Audio Manager").GetComponent<AudioManager>().Play("Ambient");
+        //--------------------------------------------------------------------------------
     }
 	
 	// Update is called once per frame

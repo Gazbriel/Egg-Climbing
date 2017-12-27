@@ -11,7 +11,7 @@ public class CascarasCounterText : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
-		
-	}
+	void FixedUpdate () {
+        GetComponent<Text>().text = PlayerPrefs.GetInt("cascaras").ToString();
+    }
 }

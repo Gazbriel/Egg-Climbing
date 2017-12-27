@@ -1,16 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UnlockButtonController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		
-	}
+
+    }
 	
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
         CheckUnlockedEgg();
 
     }
@@ -25,7 +26,7 @@ public class UnlockButtonController : MonoBehaviour {
         else
         {
             //Unlock code
-            if (PlayerPrefs.GetInt("cascaras") > GameObject.FindGameObjectWithTag("Eggs Selector").GetComponent<EggSelector>().eggList[GameObject.FindGameObjectWithTag("Eggs Selector").GetComponent<EggSelector>().currentEgg].GetComponent<OtherStats>().collectableCost)
+            if (PlayerPrefs.GetInt("cascaras") >= GameObject.FindGameObjectWithTag("Eggs Selector").GetComponent<EggSelector>().eggList[GameObject.FindGameObjectWithTag("Eggs Selector").GetComponent<EggSelector>().currentEgg].GetComponent<OtherStats>().collectableCost)
             {
                 PlayerPrefs.SetInt("cascaras", PlayerPrefs.GetInt("cascaras") - GameObject.FindGameObjectWithTag("Eggs Selector").GetComponent<EggSelector>().eggList[GameObject.FindGameObjectWithTag("Eggs Selector").GetComponent<EggSelector>().currentEgg].GetComponent<OtherStats>().collectableCost);
                 PlayerPrefs.SetInt(GameObject.FindGameObjectWithTag("Eggs Selector").GetComponent<EggSelector>().eggList[GameObject.FindGameObjectWithTag("Eggs Selector").GetComponent<EggSelector>().currentEgg].name, 1);
@@ -33,7 +34,9 @@ public class UnlockButtonController : MonoBehaviour {
         }
     }
 
-    #region Select Crrect Image for the Button
+    #region Select Correct Image for the Button
+    public Sprite unlockSprite;
+    public Sprite selectSprite;
     public void CheckUnlockedEgg()
     {
         if (PlayerPrefs.GetInt(GameObject.FindGameObjectWithTag("Eggs Selector").GetComponent<EggSelector>().eggList[GameObject.FindGameObjectWithTag("Eggs Selector").GetComponent<EggSelector>().currentEgg].name) == 1)
@@ -42,17 +45,27 @@ public class UnlockButtonController : MonoBehaviour {
             if (GameObject.FindGameObjectWithTag("Eggs Selector").GetComponent<EggSelector>().eggList[GameObject.FindGameObjectWithTag("Eggs Selector").GetComponent<EggSelector>().currentEgg] == GameObject.FindGameObjectWithTag("Player Prefs").GetComponent<PlayerPreferences>().egg)
             {
                 //Show the selected image
+                GetComponent<Image>().sprite = selectSprite;
+                GetComponent<Button>().interactable = false;
+                GetComponentInChildren<Text>().text = "";
             }
             else
             {
                 //get the unlocked (Select) image to the button
+                //Debug.Log("Seted the select image");
+                GetComponent<Image>().sprite = selectSprite;
+                GetComponent<Button>().interactable = true;
+                GetComponentInChildren<Text>().text = "";
             }
 
         }
         else
         {
             //locked
-            //get the Set Egg Image to the button
+            //get the Unlock Image to the button
+            GetComponent<Image>().sprite = unlockSprite;
+            GetComponent<Button>().interactable = true;
+            GetComponentInChildren<Text>().text = GameObject.FindGameObjectWithTag("Eggs Selector").GetComponent<EggSelector>().eggList[GameObject.FindGameObjectWithTag("Eggs Selector").GetComponent<EggSelector>().currentEgg].GetComponent<OtherStats>().collectableCost.ToString();
         }
     }
     #endregion
