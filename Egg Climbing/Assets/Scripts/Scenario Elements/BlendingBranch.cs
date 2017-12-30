@@ -10,6 +10,7 @@ public class BlendingBranch : MonoBehaviour {
     {
         a = Random.Range(0, 2);
         SetPosition();
+        GenerateCollectable();
     }
 
     // Update is called once per frame
@@ -39,6 +40,31 @@ public class BlendingBranch : MonoBehaviour {
     }
 
     #endregion
+
+    //a == 0 is left
+    public int probability;
+    public Vector3 position;
+    private void GenerateCollectable()
+    {
+        GameObject collectable = GameObject.Find("Level Generator").GetComponent<LevelGenerator>().collectable;
+        int value = Random.Range(0, 100);
+        if (value < probability)
+        {
+            // update hight value
+            position.y += transform.position.y;
+            //---------------
+            switch (a)
+            {
+                case 0:
+                    Instantiate(collectable, position, collectable.transform.rotation);
+                    break;
+                case 1:
+                    position.x = -position.x;
+                    Instantiate(collectable, position, collectable.transform.rotation);
+                    break;
+            }
+        }
+    }
 
 
 }

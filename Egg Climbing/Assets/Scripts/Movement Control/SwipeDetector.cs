@@ -7,6 +7,10 @@ public class SwipeDetector : MonoBehaviour {
 
     private bool isDragging;
     private Vector2 startTouch, swipeDelta;
+    public Vector2 GetStartTouch()
+    {
+        return startTouch;
+    }
     #region canJump Variable and acces properties
     public bool canJump;
     public void SetCanJump(bool a)

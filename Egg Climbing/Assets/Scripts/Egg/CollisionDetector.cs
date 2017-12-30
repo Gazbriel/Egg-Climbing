@@ -9,8 +9,8 @@ public class CollisionDetector : MonoBehaviour {
         lasHightGrounded = transform.position.y;
 
     }
-	
-	// Update is called once per frame
+
+    // Update is called once per frame
 	void Update () {
         //verify if is far from ground
         CheckGrounded();
@@ -75,7 +75,18 @@ public class CollisionDetector : MonoBehaviour {
         }
         Debug.Log("The eagle has landed");
 
-        
+        #region Collision with Side walls //Dont work yet
+        if (collision.gameObject.tag == "Side Walls")
+        {
+            if (collision.relativeVelocity.x > GetComponent<LifeDuration>().sideVelocityDamage || collision.relativeVelocity.x < -GetComponent<LifeDuration>().sideVelocityDamage)
+            {
+                //Do damage
+                GetComponent<LifeDuration>().DoDamage();
+                //Debug.Log("Collision velocity "+GetComponent<Rigidbody2D>().velocity.y);
+            }
+        }
+        #endregion
+
     }
     #endregion
 

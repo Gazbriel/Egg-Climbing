@@ -2,6 +2,7 @@
 using UnityEngine;
 //Esto es para poder buscar usando array.find
 using System;
+using UnityEngine.UI;
 //-------------------------------------------
 
 public class AudioManager : MonoBehaviour {
@@ -57,10 +58,13 @@ public class AudioManager : MonoBehaviour {
     }
     public void Play(string name)
     {
-        //busca de entre los sounds, el que tenga como nombre name
-        Sound s = GetSound(name);
-        s.source.Play();
-        s.isPlaying = true;
+        if (!mute)
+        {
+            //busca de entre los sounds, el que tenga como nombre name
+            Sound s = GetSound(name);
+            s.source.Play();
+            s.isPlaying = true;
+        }
     }
 
     public void Stop(string name)
@@ -75,5 +79,23 @@ public class AudioManager : MonoBehaviour {
         s.isPlaying = false;
     }
 
-    
+    #region Mute
+    public bool mute;
+    public void Mute()
+    {
+        if (!mute)
+        {
+            mute = true;
+            //is true and need to stop the music in the menu
+            Stop("Menu Background Music");
+        }
+        else
+        {
+            mute = false;
+            //is in the menu, and need to be play themusic of the menu
+            Debug.Log("Playyyyy");
+            Play("Menu Background Music");
+        }
+    }
+    #endregion
 }

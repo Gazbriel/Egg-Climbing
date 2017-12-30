@@ -55,8 +55,8 @@ public class PlayerPreferences : MonoBehaviour {
 
         //this only works if the boolean is active
         ResetBest();
-        ResetCascaras();
         ResetEggsCollected();
+        ResetCollectables();
         //-----------------------------------------
 
         //Set the first egg alwways available (0 is false, 1 is true)
@@ -97,26 +97,67 @@ public class PlayerPreferences : MonoBehaviour {
         PlayerPrefs.SetInt("best", currentScore);
     }
     #endregion
+    
+    //#region Set the cascaras
+    //public bool resetCascaras;
+    //private int cascarasObtained;
+    //private void ResetCascaras()
+    //{
+    //    if (resetCascaras)
+    //    {
+    //        PlayerPrefs.SetInt("cascaras", 0);
+    //    }
+    //}
+    //public int GetCascarasObtained()
+    //{
+    //    return cascarasObtained;
+    //}
+    //public void SetCascarasObtained()
+    //{
+    //    if (currentScore < 5)
+    //    {
+    //        cascarasObtained = 2;
+    //    }
+    //    else// > 5
+    //    {
+    //        cascarasObtained = (int)(2 + Mathf.Sqrt(currentScore));
+    //    }
+        
+    //    PlayerPrefs.SetInt("cascaras", PlayerPrefs.GetInt("cascaras") + cascarasObtained);
+    //    Debug.Log("cascaras " + PlayerPrefs.GetInt("cascaras"));
+        
+    //}
+    //#endregion
 
-    #region Set the cascaras
-    public bool resetCascaras;
-    private int cascarasObtained;
-    private void ResetCascaras()
+    #region Set the Collectables (Pluma)
+    public bool resetCollectables;
+    public int collectablesObtained;
+    private void ResetCollectables()
     {
-        if (resetCascaras)
+        if (resetCollectables)
         {
-            PlayerPrefs.SetInt("cascaras", 0);
+            PlayerPrefs.SetInt("collectables", 0);
         }
     }
-    public int GetCascarasObtained()
+    public void ResetCollectablesObtained()
     {
-        return cascarasObtained;
+        collectablesObtained = 0;
     }
-    public void SetCascarasObtained()
+    public int GetCollectablesObtained()
     {
-        PlayerPrefs.SetInt("cascaras", PlayerPrefs.GetInt("cascaras") + (int)(2 + currentScore / 10));
-        Debug.Log("cascaras " + PlayerPrefs.GetInt("cascaras"));
-        cascarasObtained = (int)(2 + currentScore / 10);
+        return collectablesObtained;
+    }
+    public void AddCollectablesObtained(int a)
+    {
+        //add to collectables obtained
+        collectablesObtained += a;
+        //add to collectables
+        AddCollectables(a);
+    }
+    public void AddCollectables(int a)
+    {
+        //add the a amount of collectables to the existing allready.
+        PlayerPrefs.SetInt("collectables", PlayerPrefs.GetInt("collectables") + a);
     }
     #endregion
 

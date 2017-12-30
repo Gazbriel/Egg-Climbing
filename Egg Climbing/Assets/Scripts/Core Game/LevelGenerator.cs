@@ -16,7 +16,8 @@ public class LevelGenerator : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        
+        //GenerateCollectable();
+
         if (GameObject.FindGameObjectWithTag("Egg") != null)
         {
             if ((lastElementPositionY - GameObject.FindGameObjectWithTag("Egg").transform.position.y) < drawingDistance)
@@ -34,6 +35,9 @@ public class LevelGenerator : MonoBehaviour {
 
     //Player
     public GameObject egg;
+
+    //Collectables
+    public GameObject collectable;
 
     //Gameplay grounds
     public GameObject strongBranch;
@@ -126,6 +130,17 @@ public class LevelGenerator : MonoBehaviour {
     //    Instantiate(strongBranch, new Vector3(strongBranch.transform.position.x, lastElementPositionY + distanceBetweenObjects, strongBranch.transform.position.z), strongBranch.transform.rotation);
     //    lastElementPositionY += distanceBetweenObjects;
     //}
+
+    private float lastCollectablePosition;
+    public void GenerateCollectable()
+    {
+        //if (GameObject.FindGameObjectsWithTag("Pluma").Length < 10)
+        //{
+        //    Instantiate(collectable, new Vector3(Random.Range(-7, 7), 4 + lastCollectablePosition + distanceBetweenObjects, 0), transform.rotation);
+        //    lastCollectablePosition += distanceBetweenObjects;
+        //}
+        
+    }
     #endregion
 
     #region Generate Backgrounds

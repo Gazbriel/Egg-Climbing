@@ -26,9 +26,12 @@ public class UnlockButtonController : MonoBehaviour {
         else
         {
             //Unlock code
-            if (PlayerPrefs.GetInt("cascaras") >= GameObject.FindGameObjectWithTag("Eggs Selector").GetComponent<EggSelector>().eggList[GameObject.FindGameObjectWithTag("Eggs Selector").GetComponent<EggSelector>().currentEgg].GetComponent<OtherStats>().collectableCost)
+            if (PlayerPrefs.GetInt("collectables") >= GameObject.FindGameObjectWithTag("Eggs Selector").GetComponent<EggSelector>().eggList[GameObject.FindGameObjectWithTag("Eggs Selector").GetComponent<EggSelector>().currentEgg].GetComponent<OtherStats>().collectableCost)
             {
-                PlayerPrefs.SetInt("cascaras", PlayerPrefs.GetInt("cascaras") - GameObject.FindGameObjectWithTag("Eggs Selector").GetComponent<EggSelector>().eggList[GameObject.FindGameObjectWithTag("Eggs Selector").GetComponent<EggSelector>().currentEgg].GetComponent<OtherStats>().collectableCost);
+                //Play sound effect Unlock
+                GameObject.Find("Audio Manager").GetComponent<AudioManager>().Play("Unlock");
+                //-------------------------------------
+                PlayerPrefs.SetInt("collectables", PlayerPrefs.GetInt("collectables") - GameObject.FindGameObjectWithTag("Eggs Selector").GetComponent<EggSelector>().eggList[GameObject.FindGameObjectWithTag("Eggs Selector").GetComponent<EggSelector>().currentEgg].GetComponent<OtherStats>().collectableCost);
                 PlayerPrefs.SetInt(GameObject.FindGameObjectWithTag("Eggs Selector").GetComponent<EggSelector>().eggList[GameObject.FindGameObjectWithTag("Eggs Selector").GetComponent<EggSelector>().currentEgg].name, 1);
             }
         }

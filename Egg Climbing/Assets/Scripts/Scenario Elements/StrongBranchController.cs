@@ -8,6 +8,7 @@ public class StrongBranchController : MonoBehaviour {
 	void Start () {
         a = Random.Range(0, 2);
         SetPosition();
+        GenerateCollectable();
     }
 	
 	// Update is called once per frame
@@ -35,4 +36,27 @@ public class StrongBranchController : MonoBehaviour {
     }
 
     #endregion
+
+    public int probability;
+    public Vector3 offset;
+    private void GenerateCollectable()
+    {
+        int value = Random.Range(0, 100);
+        if (value < probability)
+        {
+            offset.y += transform.position.y;
+            GameObject collectable = GameObject.Find("Level Generator").GetComponent<LevelGenerator>().collectable;
+            //do
+            switch (a)
+            {
+                case 0:
+                    Instantiate(collectable, offset, collectable.transform.rotation);
+                    break;
+                case 1:
+                    offset.x = -offset.x;
+                    Instantiate(collectable, offset, collectable.transform.rotation);
+                    break;
+            }
+        }
+    }
 }

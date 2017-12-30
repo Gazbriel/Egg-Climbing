@@ -44,6 +44,8 @@ public class LifeDuration : MonoBehaviour {
         return eggLife;
     }
     public float damageHight;
+    public float maxDamageHight;
+    public float sideVelocityDamage;
     private float higherPosition;
     private void UpdateHigherPosition()
     {
@@ -52,22 +54,34 @@ public class LifeDuration : MonoBehaviour {
             higherPosition = transform.position.y;
         }
     }
-    public void Damage()
+    public void Damage()//this one verifies if damage can be done due to vertical fall.
     {
         if (canDamage && (higherPosition - transform.position.y) > damageHight)
         {
-            eggLife--;
-            FindObjectOfType<AudioManager>().Play("Shatter Egg");
-            Debug.Log("Damage");
-
-            //Update the brake layer to see the damage in the gg
-            GetComponentInChildren<BrakeLayerController>().UpdateBrakeLayer();
-            //----------------------------------------------------
-            //reset the higher position
-            higherPosition = transform.position.y;
-            //--------------------------
+            if (canDamage && (higherPosition - transform.position.y) > maxDamageHight)
+            {
+                eggLife = 0;
+            }
+            DoDamage();
         }
+        //else if (canDamage)// this is for the sound efect when toucjes the ground
+        //{
+        //    FindObjectOfType<AudioManager>().Play("Ground Touch");
+        //}
         canDamage = false;
+    }
+    public void DoDamage()//this do the damage no matter what
+    {
+        eggLife--;
+        FindObjectOfType<AudioManager>().Play("Shatter Egg");
+        Debug.Log("Damage");
+
+        //Update the brake layer to see the damage in the gg
+        GetComponentInChildren<BrakeLayerController>().UpdateBrakeLayer();
+        //----------------------------------------------------
+        //reset the higher position
+        higherPosition = transform.position.y;
+        //--------------------------
     }
 
     public bool canDamage;
@@ -93,9 +107,13 @@ public class LifeDuration : MonoBehaviour {
             GameObject.Find("Audio Manager").GetComponent<AudioManager>().Stop("Gameplay");
             GameObject.Find("Audio Manager").GetComponent<AudioManager>().Stop("Ambient");
             //----------------------------------------------------------------------------------
+            //Play the Lose Music
+            //GameObject.Find("Audio Manager").GetComponent<AudioManager>().Play("Lose");
+            //-------------------------------------------
 
             //Set the cascaras obtained
-            GameObject.FindGameObjectWithTag("Player Prefs").GetComponent<PlayerPreferences>().SetCascarasObtained();
+            //Is not working anymore
+            //GameObject.FindGameObjectWithTag("Player Prefs").GetComponent<PlayerPreferences>().SetCascarasObtained();
             //The method knows how many cascaras give to the player.
             //----------------------------
 
@@ -109,26 +127,34 @@ public class LifeDuration : MonoBehaviour {
             //-----------------------------------------
 
 
-
             //Close the big leafs
-            GameObject.Find("Leaf Pass").GetComponent<Animator>().SetBool("out", false);
-            GameObject.Find("Leaf Pass").GetComponent<Animator>().SetBool("in", true);
+            StartCoroutine(CloseLeaf());
+            //----------------------------------------
+            //Load new Scene
             StartCoroutine(LoadSceneAfterDie());
-
+            //------------------------------------
+            
             //to run this metho only once
             eggIsDead = true;
         }
         
     }
-
-    public float secondsToWaitAfterDeath;
+    
     IEnumerator LoadSceneAfterDie()
     {
         Debug.Log("Waiting");
-        yield return new WaitForSeconds(secondsToWaitAfterDeath);
+        yield return new WaitForSeconds(1f);//with music is 1.4, whitout it is 0.6
         SceneManager.LoadScene("PlayResults");
     }
-
+    
+    IEnumerator CloseLeaf()
+    {
+        yield return new WaitForSeconds(0.4f);//with music is 0.6, whitout it is 0
+        //Close the big leafs
+        GameObject.Find("Leaf Pass").GetComponent<Animator>().SetBool("out", false);
+        GameObject.Find("Leaf Pass").GetComponent<Animator>().SetBool("in", true);
+    }
+    
     private void VerifyEggLife()
     {
         if (eggLife < 0 || eggLife == 0)

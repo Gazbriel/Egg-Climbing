@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class UIMenu : MonoBehaviour {
 
@@ -35,6 +36,11 @@ public class UIMenu : MonoBehaviour {
     {
         SetOutAnimations();
         eggMenu = true;
+    }
+
+    public void SetMute()
+    {
+        GameObject.Find("Audio Manager").GetComponent<AudioManager>().Mute();
     }
 
     private void Update()
@@ -88,6 +94,8 @@ public class UIMenu : MonoBehaviour {
             }
         }
         #endregion
+
+        
     }
 
     #region Set Out the animations
@@ -97,6 +105,10 @@ public class UIMenu : MonoBehaviour {
         foreach (var anim in anims)
         {
             anim.SetBool("out", true);
+        }
+        if (GameObject.FindGameObjectWithTag("Egg Showed") != null)
+        {
+            GameObject.FindGameObjectWithTag("Egg Showed").GetComponent<Animator>().SetBool("right", true);
         }
     }
     #endregion
