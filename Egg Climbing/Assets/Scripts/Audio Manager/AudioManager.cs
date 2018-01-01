@@ -67,6 +67,12 @@ public class AudioManager : MonoBehaviour {
         }
     }
 
+    public void PlayRandom(string[] sounds)
+    {
+        string soundToPlay = sounds[UnityEngine.Random.Range(0, sounds.Length)];
+        Play(soundToPlay);
+    }
+
     public void Stop(string name)
     {
         Sound s = Array.Find(sounds, sound => sound.name == name);

@@ -2,8 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SwipeDetector : MonoBehaviour {
+public class SwipeDetectorVelocityController : MonoBehaviour {
+    //Velocity Sensitive, not Distance.
     //4 directions
+
+    private void Start()
+    {
+        touchTimeForce = maxTouchTimeForce;
+    }
 
     private bool isDragging;
     private Vector2 startTouch, swipeDelta;
@@ -26,9 +32,6 @@ public class SwipeDetector : MonoBehaviour {
     [Header("Power of Throwing")]
     public float power;//power of throwing
 
-    public float circleLimitThrow;
-    public float underCircleLimitThrow;
-
     private void Update()
     {
 
@@ -46,7 +49,9 @@ public class SwipeDetector : MonoBehaviour {
             Reset();
         }
         #endregion
-        
+
+        UpdateTouchTime();
+        SetGlobalForce();
 
         #region Calculate distance
         swipeDelta = Vector2.zero;
@@ -54,60 +59,37 @@ public class SwipeDetector : MonoBehaviour {
         {
             if (Input.GetMouseButton(0))
             {
-                //Debug.Log(swipeDelta);
                 Vector2 mouseUp = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 swipeDelta = mouseUp - startTouch;
-                //Debug.Log(startTouch);
-                //Debug.Log(swipeDelta);
             }
         }
         #endregion
-
-        
-
     }
 
     private void DoAction()
     {
         //verify if can do the action and there is a rigidboy attached to the egg
-        if (canJump && GameObject.FindGameObjectWithTag("Egg").GetComponent<Rigidbody2D>() != null)
+        if (canJump && GameObject.FindGameObjectWithTag("Egg").GetComponent<Rigidbody2D>() != null && globalForce.magnitude > minGlobalForce)
         {
+            Debug.Log("JUMPPPP");
             //Stop the movement of the Egg
             GameObject.FindGameObjectWithTag("Egg").GetComponent<Rigidbody2D>().velocity = new Vector3();
             //--------------------------------
 
-            //if swipedelta is bigger than the limit and if you pointed up
-            if (swipeDelta.magnitude > circleLimitThrow && swipeDelta.y > 0)
-            {
-                Debug.Log("Did Throw Max");
-                //do the action with swipeMagnitude.normalized
-                GameObject.FindGameObjectWithTag("Egg").GetComponent<Rigidbody2D>().AddForce(swipeDelta.normalized * circleLimitThrow * power);
-                AddTorque();
+            //do the action with Velocity
+            GameObject.FindGameObjectWithTag("Egg").GetComponent<Rigidbody2D>().AddForce(globalForce);
+            AddTorque();
+            ResetTime();
 
-                // Play sound jump
-                //Debug.Log("Played jump sound");
-                GameObject.Find("Audio Manager").GetComponent<AudioManager>().PlayRandom(new string[3] { "Jump1", "Jump2", "Jump3" });
-                //-------------------------
+            // Play sound jump
+            //Debug.Log("Played jump sound");
+            GameObject.Find("Audio Manager").GetComponent<AudioManager>().PlayRandom(new string[3] { "Jump1", "Jump2", "Jump3" });
+            //-------------------------
 
-                //-----
-                canJump = false;
-                GameObject.FindGameObjectWithTag("Egg").GetComponent<CollisionDetector>().SetGrounded(false);
-            }
-            else if (swipeDelta.magnitude < circleLimitThrow && swipeDelta.magnitude > underCircleLimitThrow && swipeDelta.y > 0)
-            {
-                Debug.Log("Did Throw Between");
-                GameObject.FindGameObjectWithTag("Egg").GetComponent<Rigidbody2D>().AddForce(swipeDelta * power);
-                AddTorque();
+            //-----
+            canJump = false;
+            GameObject.FindGameObjectWithTag("Egg").GetComponent<CollisionDetector>().SetGrounded(false);
 
-                // Play sound jump -------------
-                GameObject.Find("Audio Manager").GetComponent<AudioManager>().PlayRandom(new string[3] { "Jump1", "Jump2", "Jump3" });
-                //------------------------------
-
-                //-----
-                canJump = false;
-                GameObject.FindGameObjectWithTag("Egg").GetComponent<CollisionDetector>().SetGrounded(false);
-            }
-            
         }
     }
 
@@ -125,7 +107,43 @@ public class SwipeDetector : MonoBehaviour {
         {
             GameObject.FindGameObjectWithTag("Egg").GetComponent<Rigidbody2D>().AddTorque(-torqueForce);
         }
-        
+
+    }
+    #endregion
+
+    #region Time Controller
+    // there is a max value that decresses when the key is pressed and that value is multiplied to the push force.
+    public float minTouchTimeForce;
+    public float maxTouchTimeForce;
+    private float touchTimeForce;
+    private void UpdateTouchTime()
+    {
+        if (Input.GetMouseButton(0) && touchTimeForce > minTouchTimeForce)
+        {
+            touchTimeForce -= Time.deltaTime;
+        }
+    }
+    private void ResetTime()
+    {
+        touchTimeForce = maxTouchTimeForce;
+    }
+
+    #endregion
+
+    #region General Force Controller
+    public float maxGlobalForce;
+    public float minGlobalForce;
+    private Vector2 globalForce;
+    private void SetGlobalForce()
+    {
+        //if the global force is too big,
+        //set the global force to the maximum
+        //else, set the current global force.
+        globalForce = swipeDelta * power * touchTimeForce;
+        if (globalForce.magnitude > maxGlobalForce)
+        {
+            globalForce = globalForce.normalized * maxGlobalForce;
+        }
     }
     #endregion
 
@@ -134,6 +152,4 @@ public class SwipeDetector : MonoBehaviour {
         startTouch = swipeDelta = Vector2.zero;
         isDragging = false;
     }
-
-
 }

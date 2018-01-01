@@ -24,10 +24,12 @@ public class CollisionDetector : MonoBehaviour {
         if (grounded)
         {
             GameObject.Find("Slide Detector").GetComponent<SwipeDetector>().SetCanJump(true);
+            GameObject.Find("Slide Detector").GetComponent<SwipeDetectorVelocityController>().SetCanJump(true);
         }
         else
         {
             GameObject.Find("Slide Detector").GetComponent<SwipeDetector>().SetCanJump(false);
+            GameObject.Find("Slide Detector").GetComponent<SwipeDetectorVelocityController>().SetCanJump(false);
         }
     }
     
