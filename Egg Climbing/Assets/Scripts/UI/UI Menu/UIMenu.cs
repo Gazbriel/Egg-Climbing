@@ -21,7 +21,14 @@ public class UIMenu : MonoBehaviour {
 	public void PlayGame()
     {
         SetOutAnimations();
-        play = true;
+        if (PlayerPrefs.GetInt("doneTutorial") == 0)
+        {
+            tutorial = true;
+        }
+        else
+        {
+            play = true;
+        }
     }
 
     private bool backToMenu;
@@ -47,6 +54,10 @@ public class UIMenu : MonoBehaviour {
     {
         ChangeScene();
     }
+
+    //For the tutorial 
+    private bool tutorial;
+    //----------------------------
 
     private void ChangeScene()
     {
@@ -95,7 +106,23 @@ public class UIMenu : MonoBehaviour {
         }
         #endregion
 
-        
+        #region Tutorial
+        if (tutorial)
+        {
+            if (timeToWait < 0)
+            {
+                //stop playn the music
+                GameObject.Find("Audio Manager").GetComponent<AudioManager>().Stop("Menu Background Music");
+                //------------------------
+                SceneManager.LoadScene("Tutorial");
+            }
+            else
+            {
+                timeToWait -= Time.deltaTime;
+            }
+        }
+        #endregion
+
     }
 
     #region Set Out the animations

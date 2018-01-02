@@ -12,10 +12,16 @@ public class LevelGenerator : MonoBehaviour {
         GameObject.Find("Audio Manager").GetComponent<AudioManager>().Play("Gameplay");
         GameObject.Find("Audio Manager").GetComponent<AudioManager>().Play("Ambient");
         //--------------------------------------------------------------------------------
+
+        //Intantiate Tutorial
+        //GameObject.FindGameObjectWithTag("Player Prefs").GetComponent<PlayerPreferences>().ShowTutorial();
+        //--------------------------
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+
+
+    // Update is called once per frame
+    void Update () {
         //GenerateCollectable();
 
         if (GameObject.FindGameObjectWithTag("Egg") != null)

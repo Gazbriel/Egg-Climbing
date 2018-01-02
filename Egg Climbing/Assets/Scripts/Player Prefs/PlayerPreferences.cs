@@ -47,6 +47,13 @@ public class PlayerPreferences : MonoBehaviour {
             PlayerPrefs.SetInt("Egg 5", 0);
         }
     }
+    private void ResetTutorial()
+    {
+        if (resetTutorial)
+        {
+            PlayerPrefs.SetInt("doneTutorial", 0);
+        }
+    }
     #endregion
 
     // Use this for initialization
@@ -57,6 +64,7 @@ public class PlayerPreferences : MonoBehaviour {
         ResetBest();
         ResetEggsCollected();
         ResetCollectables();
+        ResetTutorial();
         //-----------------------------------------
 
         //Set the first egg alwways available (0 is false, 1 is true)
@@ -183,6 +191,11 @@ public class PlayerPreferences : MonoBehaviour {
     {
         return egg;
     }
+    #endregion
+
+    #region Tutorial
+    public bool resetTutorial;
+
     #endregion
 
 }
