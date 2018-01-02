@@ -28,6 +28,10 @@ public class LifeDuration : MonoBehaviour {
 
         //pass the value to the braker layer controller
         GetComponentInChildren<BrakeLayerController>().SetStarterLife(eggLife);
+
+        //pass the value to the UI and start the ui funcion
+        GameObject.Find("Lifes").GetComponent<EggLifeUI>().SetEggLifesCounter(eggLife);
+        GameObject.Find("Lifes").GetComponent<EggLifeUI>().CreateStartingLifes();
     }
 
     public int GetStarterLife()
@@ -60,6 +64,9 @@ public class LifeDuration : MonoBehaviour {
         {
             if (canDamage && (higherPosition - transform.position.y) > maxDamageHight)
             {
+                //Eliminate the ui eggs
+                GameObject.Find("Lifes").GetComponent<EggLifeUI>().SetAllFalse();
+                //---------------------------------------------------------------
                 eggLife = 0;
             }
             DoDamage();
@@ -72,6 +79,7 @@ public class LifeDuration : MonoBehaviour {
     }
     public void DoDamage()//this do the damage no matter what
     {
+        GameObject.Find("Lifes").GetComponent<EggLifeUI>().RemoveLife();
         eggLife--;
         FindObjectOfType<AudioManager>().Play("Shatter Egg");
         Debug.Log("Damage");
@@ -111,6 +119,11 @@ public class LifeDuration : MonoBehaviour {
             //GameObject.Find("Audio Manager").GetComponent<AudioManager>().Play("Lose");
             //-------------------------------------------
 
+
+            //Eliminate the ui eggs
+            GameObject.Find("Lifes").GetComponent<EggLifeUI>().SetAllFalse();
+            //---------------------------------------------------------------
+
             //Set the cascaras obtained
             //Is not working anymore
             //GameObject.FindGameObjectWithTag("Player Prefs").GetComponent<PlayerPreferences>().SetCascarasObtained();
@@ -126,10 +139,18 @@ public class LifeDuration : MonoBehaviour {
             Destroy(GetComponent<CapsuleCollider2D>());
             //-----------------------------------------
 
+            //Close the UI collectables life score
+            var anims = GameObject.Find("UI").GetComponentsInChildren<Animator>();
+            foreach (var anim in anims)
+            {
+                anim.SetBool("out", true);
+            }
+            //----------------------------------------
 
             //Close the big leafs
             StartCoroutine(CloseLeaf());
             //----------------------------------------
+            
             //Load new Scene
             StartCoroutine(LoadSceneAfterDie());
             //------------------------------------

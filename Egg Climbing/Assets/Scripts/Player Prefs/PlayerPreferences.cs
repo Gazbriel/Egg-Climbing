@@ -82,6 +82,10 @@ public class PlayerPreferences : MonoBehaviour {
 
     #region Set the Score
     public int currentScore;
+    public int GetCurrentScore()
+    {
+        return currentScore;
+    }
     public void SetCurrentScore(int score)
     {
         currentScore = score;

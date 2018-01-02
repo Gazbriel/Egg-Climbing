@@ -12,6 +12,7 @@ public class CollectableCounterText : MonoBehaviour {
 	
 	// Update is called once per frame
 	void FixedUpdate () {
+
         GetComponent<Text>().text = GameObject.FindGameObjectWithTag("Player Prefs").GetComponent<PlayerPreferences>().GetCollectablesObtained().ToString();
     }
 }

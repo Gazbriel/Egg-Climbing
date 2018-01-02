@@ -79,7 +79,6 @@ public class SwipeDetectorVelocityController : MonoBehaviour {
             //do the action with Velocity
             GameObject.FindGameObjectWithTag("Egg").GetComponent<Rigidbody2D>().AddForce(globalForce);
             AddTorque();
-            ResetTime();
 
             // Play sound jump
             //Debug.Log("Played jump sound");
@@ -91,6 +90,8 @@ public class SwipeDetectorVelocityController : MonoBehaviour {
             GameObject.FindGameObjectWithTag("Egg").GetComponent<CollisionDetector>().SetGrounded(false);
 
         }
+        //Reset the touch time force.
+        ResetTime();
     }
 
     #region Egg Rotation
@@ -115,12 +116,13 @@ public class SwipeDetectorVelocityController : MonoBehaviour {
     // there is a max value that decresses when the key is pressed and that value is multiplied to the push force.
     public float minTouchTimeForce;
     public float maxTouchTimeForce;
+    public float timeDereasseMultiplier;
     private float touchTimeForce;
     private void UpdateTouchTime()
     {
         if (Input.GetMouseButton(0) && touchTimeForce > minTouchTimeForce)
         {
-            touchTimeForce -= Time.deltaTime;
+            touchTimeForce -= Time.deltaTime*timeDereasseMultiplier;
         }
     }
     private void ResetTime()
@@ -143,6 +145,10 @@ public class SwipeDetectorVelocityController : MonoBehaviour {
         if (globalForce.magnitude > maxGlobalForce)
         {
             globalForce = globalForce.normalized * maxGlobalForce;
+        }
+        if (globalForce.magnitude < minGlobalForce)
+        {
+            globalForce = globalForce.normalized * minGlobalForce;
         }
     }
     #endregion
