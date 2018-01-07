@@ -107,6 +107,10 @@ public class PlayerPreferences : MonoBehaviour {
     {
         Debug.Log("New Best " + currentScore);
         PlayerPrefs.SetInt("best", currentScore);
+
+        //send the best score to leaderboard
+        GameObject.Find("Leaderboard").GetComponent<LadderboardController>().ReportScore(currentScore);
+        //-----------------------------------
     }
     #endregion
     

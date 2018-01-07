@@ -8,6 +8,7 @@ public class LifeDuration : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         LoadEgg();
+        egglifescopy = eggLife;
 	}
 	
 	// Update is called once per frame
@@ -20,19 +21,22 @@ public class LifeDuration : MonoBehaviour {
     #region Load Egg
     //this funtion in the future is gonna load the Egg that the players is currently using
     //but now just load a value:
-    private void LoadEgg()
+    public void LoadEgg()
     {
         //eggLife = 3;
 
         
 
         //pass the value to the braker layer controller
-        GetComponentInChildren<BrakeLayerController>().SetStarterLife(eggLife);
+        GetComponentInChildren<BrakeLayerController>().SetStarterLife(egglifescopy);
 
         //pass the value to the UI and start the ui funcion
         GameObject.Find("Lifes").GetComponent<EggLifeUI>().SetEggLifesCounter(eggLife);
         GameObject.Find("Lifes").GetComponent<EggLifeUI>().CreateStartingLifes();
     }
+    //this is for reset the egg lifes
+    private int egglifescopy;
+    //----------------------------------
 
     public int GetStarterLife()
     {
@@ -118,7 +122,7 @@ public class LifeDuration : MonoBehaviour {
             //Play the Lose Music
             //GameObject.Find("Audio Manager").GetComponent<AudioManager>().Play("Lose");
             //-------------------------------------------
-
+            
 
             //Eliminate the ui eggs
             GameObject.Find("Lifes").GetComponent<EggLifeUI>().SetAllFalse();
@@ -146,6 +150,10 @@ public class LifeDuration : MonoBehaviour {
                 anim.SetBool("out", true);
             }
             //----------------------------------------
+
+            //Show the video ad
+            GameObject.Find("AdsManager").GetComponent<AdsManager>().ShowDieVideo();
+            //--------------------------
 
             //Close the big leafs
             StartCoroutine(CloseLeaf());

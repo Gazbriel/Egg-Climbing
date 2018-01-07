@@ -8,6 +8,10 @@ public class LevelGenerator : MonoBehaviour {
 	void Start () {
         CreateStart();
 
+        //Create Banner
+        //GameObject.Find("AdsManager").GetComponent<AdManager>().ShowBanner();
+        //--------------------
+
         //------Play Music-------------------------------------------------------------
         GameObject.Find("Audio Manager").GetComponent<AudioManager>().Play("Gameplay");
         GameObject.Find("Audio Manager").GetComponent<AudioManager>().Play("Ambient");
